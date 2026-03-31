@@ -1,8 +1,8 @@
 'use client';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { getSupabaseBrowser } from '@/lib/supabase-browser';
 import { initials } from '@/lib/utils';
+import NextLink from 'next/link';
 
 interface SidebarProps {
   userName: string;
@@ -26,35 +26,34 @@ export function Sidebar({ userName, userEmail, avatarUrl, clientCount = 0 }: Sid
       icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>,
     },
     {
-      href: '/clients', label: 'Clients', badge: clientCount > 0 ? clientCount : null,
-      icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>,
+      href: '/clients', label: 'Health Posts', badge: clientCount > 0 ? clientCount : null,
+      icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
     },
     {
-      href: '/clients/new', label: 'Add Client',
+      href: '/clients/new', label: 'Register Post',
       icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14" strokeLinecap="round"/></svg>,
     },
   ];
 
   return (
     <aside className="sidebar">
-      <Link href="/dashboard" className="sidebar-logo">
-        <div className="logo-gem">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
+      <NextLink href="/dashboard" className="sidebar-logo">
+        <div className="logo-gem" style={{ background: 'linear-gradient(135deg, #ef4444, #f87171)', boxShadow: '0 0 16px rgba(239,68,68,0.35)' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3">
+            <path d="M12 5v14M5 12h14" strokeLinecap="round"/>
           </svg>
         </div>
-        <span className="logo-name">ClientCRM</span>
-      </Link>
+        <span className="logo-name">CarePNG</span>
+      </NextLink>
 
       <nav className="sidebar-nav">
-        <div className="nav-section-label">Workspace</div>
+        <div className="nav-section-label">Medical Network</div>
         {nav.map(n => (
-          <Link key={n.href} href={n.href} className={`nav-item ${path === n.href || (n.href !== '/dashboard' && path.startsWith(n.href) && n.href !== '/clients/new') ? 'active' : ''}`}>
+          <NextLink key={n.href} href={n.href} className={`nav-item ${path === n.href || (n.href !== '/dashboard' && path.startsWith(n.href) && n.href !== '/clients/new') ? 'active' : ''}`}>
             {n.icon}
             {n.label}
-            {n.badge != null && <span className="nav-badge">{n.badge}</span>}
-          </Link>
+            {n.badge != null && <span className="nav-badge">${n.badge}</span>}
+          </NextLink>
         ))}
       </nav>
 

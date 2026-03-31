@@ -51,5 +51,7 @@ export interface Note {
   attachment_size: number | null;
   created_at: string;
   updated_at: string;
+  type: string;
+  urgency: string;
   author?: Pick<Profile, 'full_name' | 'avatar_url'>;
 }

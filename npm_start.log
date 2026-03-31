@@ -2,20 +2,13 @@
 > clientcrm@1.0.0 start
 > next start -p ${PORT:-3000}
 
-   ▲ Next.js 15.5.14
-   - Local:        http://localhost:3000
-   - Network:      http://192.168.0.2:3000
-
- ✓ Starting...
- ✓ Ready in 456ms
- ⨯ Error: Your project's URL and Key are required to create a Supabase client!
-
-Check your Supabase project's API settings to find these values
-
-https://supabase.com/dashboard/project/_/settings/api
-    at <unknown> (https://supabase.com/dashboard/project/_/settings/api)
-    at s (.next/server/chunks/75.js:1:12511)
-    at f (.next/server/app/clients/[id]/page.js:2:32125)
-    at async i (.next/server/app/clients/[id]/page.js:2:8213) {
-  digest: '1160094604'
+ ⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3000
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::3000)
+    at new Promise (<anonymous>) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
 }
