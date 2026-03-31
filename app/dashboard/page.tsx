@@ -31,7 +31,7 @@ export default async function DashboardPage() {
         <div className="page-header">
           <div>
             <h1 className="page-title">Good to see you, {name.split(' ')[0]}.</h1>
-            <p className="page-sub">Here's your client pipeline at a glance.</p>
+            <p className="page-sub">Here&apos;s your client pipeline at a glance.</p>
           </div>
           <Link href="/clients/new" className="btn btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14" strokeLinecap="round"/></svg>
