@@ -1,5 +1,5 @@
 -- ================================================================
--- ClientCRM — Supabase Schema + RLS Policies + Storage
+-- Helt — Supabase Schema + RLS Policies + Storage
 -- Run in Supabase SQL Editor
 -- ================================================================
 

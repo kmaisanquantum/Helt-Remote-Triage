@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'ClientCRM — Your Client Pipeline',
+  title: 'Helt — Your Client Pipeline',
   description: 'A fast, focused CRM for tracking clients, contacts, and deals.',
 };
 

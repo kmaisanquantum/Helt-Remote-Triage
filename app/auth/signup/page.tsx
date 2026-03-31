@@ -29,7 +29,7 @@ export default function SignupPage() {
           <div style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,#6366f1,#818cf8)', display:'grid', placeItems:'center', boxShadow:'0 0 16px rgba(99,102,241,0.35)' }}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <span style={{ fontSize:'1.1rem', fontWeight:700, letterSpacing:'-0.02em' }}>ClientCRM</span>
+          <span style={{ fontSize:'1.1rem', fontWeight:700, letterSpacing:'-0.02em' }}>Helt</span>
         </div>
         <h1 className="auth-title">Create account</h1>
         <p className="auth-sub">Start managing your clients today</p>

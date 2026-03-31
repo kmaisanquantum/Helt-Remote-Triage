@@ -43,7 +43,7 @@ export function Sidebar({ userName, userEmail, avatarUrl, clientCount = 0 }: Sid
             <path d="M12 5v14M5 12h14" strokeLinecap="round"/>
           </svg>
         </div>
-        <span className="logo-name">CarePNG</span>
+        <span className="logo-name">Helt</span>
       </NextLink>
 
       <nav className="sidebar-nav">
