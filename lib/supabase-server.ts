@@ -10,8 +10,12 @@ export async function getSupabaseServer() {
     {
       cookies: {
         getAll: () => cookieStore.getAll(),
-        setAll: (list) => {
-          try { list.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); } catch {}
+        setAll: (list: any) => {
+          try {
+            list.forEach(({ name, value, options }: any) => {
+              cookieStore.set(name, value, options);
+            });
+          } catch {}
         },
       },
     }
