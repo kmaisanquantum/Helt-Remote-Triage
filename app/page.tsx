@@ -62,7 +62,7 @@ export default function LandingPage() {
                 <path d="M12 5v14M5 12h14" strokeLinecap="round"/>
               </svg>
             </div>
-            <span className="nav-brand">CarePNG</span>
+            <span className="nav-brand">Helt</span>
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <Link href="/auth/login"  className="btn btn-ghost btn-sm">Sign in</Link>
@@ -76,7 +76,7 @@ export default function LandingPage() {
             Telehealth for Papua New Guinea
           </div>
           <h1>Better care for<br /><span>remote communities.</span></h1>
-          <p>CarePNG provides a critical lifeline for rural health posts. Connect with specialists via triage and track essential medicine stock in real-time.</p>
+          <p>Helt provides a critical lifeline for rural health posts. Connect with specialists via triage and track essential medicine stock in real-time.</p>
           <div className="hero-cta">
             <Link href="/auth/signup" className="btn btn-primary" style={{ background: '#ef4444', borderColor: '#ef4444' }}>
               Register Health Post
