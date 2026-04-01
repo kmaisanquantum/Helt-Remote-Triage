@@ -29,10 +29,10 @@ export function formatBytes(b: number): string {
 }
 
 export const STATUS_CONFIG: Record<ClientStatus, { label: string; color: string; bg: string; border: string }> = {
-  lead:     { label: 'Lead',     color: '#818cf8', bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.3)' },
-  active:   { label: 'Active',   color: '#34d399', bg: 'rgba(52,211,153,0.12)',  border: 'rgba(52,211,153,0.3)'  },
-  inactive: { label: 'Inactive', color: '#94a3b8', bg: 'rgba(148,163,184,0.12)',border: 'rgba(148,163,184,0.3)' },
-  churned:  { label: 'Churned',  color: '#f87171', bg: 'rgba(248,113,113,0.12)', border: 'rgba(248,113,113,0.3)' },
+  lead:     { label: 'Proposed',     color: '#818cf8', bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.3)' },
+  active:   { label: 'Operational',   color: '#34d399', bg: 'rgba(52,211,153,0.12)',  border: 'rgba(52,211,153,0.3)'  },
+  inactive: { label: 'Suspended', color: '#94a3b8', bg: 'rgba(148,163,184,0.12)',border: 'rgba(148,163,184,0.3)' },
+  churned:  { label: 'Decommissioned',  color: '#f87171', bg: 'rgba(248,113,113,0.12)', border: 'rgba(248,113,113,0.3)' },
 };
 
 export const AVATAR_COLORS = [

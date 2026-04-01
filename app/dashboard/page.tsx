@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   const [{ data: profile }, { data: posts }, { data: recentTriage }, { data: lowStock }] = await Promise.all([
     sb.from('profiles').select('*').eq('id', user.id).single(),
     sb.from('clients').select('*').eq('owner_id', user.id).order('updated_at', { ascending: false }),
-    sb.from('notes').select('*, client:clients(company,avatar_color)').eq('author_id', user.id).eq('type', 'triage').order('created_at', { ascending: false }).limit(5),
+    sb.from('notes').select('*, post:clients(company,avatar_color)').eq('author_id', user.id).eq('type', 'triage').order('created_at', { ascending: false }).limit(5),
     sb.from('inventory').select('*, post:clients(company)').lt('quantity', 10).limit(5),
   ]);
 
@@ -25,13 +25,13 @@ export default async function DashboardPage() {
 
   return (
     <div className="app-shell">
-      <Sidebar userName={profile?.full_name ?? 'User'} userEmail={user.email ?? ''} avatarUrl={profile?.avatar_url} clientCount={allPosts.length} />
+      <Sidebar userName={profile?.full_name ?? 'User'} userEmail={user.email ?? ''} avatarUrl={profile?.avatar_url} postCount={allPosts.length} />
 
       <div className="main-area">
         <div className="page-header">
           <div>
             <h1 className="page-title">Welcome back, {name.split(' ')[0]}.</h1>
-            <p className="page-sub">Monitoring the medical network in real-time.</p>
+            <p className="page-sub">Provincial health network monitoring & real-time triage.</p>
           </div>
           <Link href="/clients/new" className="btn btn-primary" style={{ background: '#ef4444', borderColor: '#ef4444' }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14" strokeLinecap="round"/></svg>
@@ -62,8 +62,8 @@ export default async function DashboardPage() {
             {/* Recent Posts */}
             <div>
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:12 }}>
-                <h2 style={{ fontSize:'1rem', fontWeight:700, letterSpacing:'-0.02em' }}>Recent Health Posts</h2>
-                <Link href="/clients" style={{ fontSize:'0.8rem', color: '#ef4444', textDecoration:'none', fontWeight:600 }}>View network →</Link>
+                <h2 style={{ fontSize:'1rem', fontWeight:700, letterSpacing:'-0.02em' }}>Medical Network Status</h2>
+                <Link href="/clients" style={{ fontSize:'0.8rem', color: '#ef4444', textDecoration:'none', fontWeight:600 }}>Manage Health Posts →</Link>
               </div>
               <div className="card" style={{ overflow:'hidden', padding:0 }}>
                 {allPosts.length === 0 ? (
@@ -81,7 +81,7 @@ export default async function DashboardPage() {
                       </div>
                       <div style={{ flex:1, minWidth:0 }}>
                         <div className="client-name">{c.company}</div>
-                        <div className="client-meta">{c.industry ?? 'General Clinic'}</div>
+                        <div className="client-meta">{c.industry ?? 'General Health Post'}</div>
                       </div>
                       <span className="badge" style={{ background: sc.bg, color: sc.color, borderColor: sc.border }}>
                         <span className="status-dot" style={{ background: sc.color }} />{sc.label}
@@ -95,12 +95,12 @@ export default async function DashboardPage() {
             {/* Inventory Alerts */}
             <div>
               <div style={{ marginBottom:12 }}>
-                <h2 style={{ fontSize:'1rem', fontWeight:700, letterSpacing:'-0.02em' }}>Stock & Triage Alerts</h2>
+                <h2 style={{ fontSize:'1rem', fontWeight:700, letterSpacing:'-0.02em' }}>Critical Network Alerts</h2>
               </div>
               <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
                 {((lowStock ?? []).length === 0 && (recentTriage ?? []).length === 0) ? (
                   <div className="card" style={{ padding:'24px 16px', textAlign:'center' }}>
-                    <p style={{ fontSize:'0.82rem', color:'var(--text-3)' }}>Network is stable. No active alerts.</p>
+                    <p style={{ fontSize:'0.82rem', color:'var(--text-3)' }}>Medical network is stable. No urgent triage or stock alerts.</p>
                   </div>
                 ) : (
                   <>
@@ -111,11 +111,11 @@ export default async function DashboardPage() {
                       </div>
                     ))}
                     {(recentTriage ?? []).map((n: any) => (
-                      <Link key={n.id} href={`/clients/${n.client_id}`} style={{ textDecoration:'none' }}>
+                      <Link key={n.id} href={`/clients/${n.post_id}`} style={{ textDecoration:'none' }}>
                         <div className="note-card" style={{ borderLeft: n.urgency === 'urgent' || n.urgency === 'emergency' ? '3px solid #ef4444' : '3px solid #818cf8' }}>
                           <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
                             <span style={{ fontSize:'0.7rem', color: n.urgency === 'urgent' || n.urgency === 'emergency' ? '#ef4444' : '#818cf8', fontWeight:700, textTransform:'uppercase' }}>
-                              {n.urgency} Triage: {n.client?.company}
+                              {n.urgency} Triage: {n.post?.company}
                             </span>
                             <span style={{ fontSize:'0.7rem', color:'var(--text-3)', marginLeft:'auto' }}>{timeAgo(n.created_at)}</span>
                           </div>

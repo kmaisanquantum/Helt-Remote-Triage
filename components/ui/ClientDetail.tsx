@@ -13,7 +13,7 @@ interface Props {
   userId: string;
 }
 
-type Tab = 'overview' | 'contacts' | 'notes' | 'inventory';
+type Tab = 'overview' | 'contacts' | 'triage' | 'inventory';
 
 export function ClientDetail({ client: initialClient, initialContacts, initialNotes, userId }: Props) {
   const router = useRouter();
@@ -175,7 +175,7 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
                 <span className="status-dot" style={{ background: sc.color }} />
                 {sc.label}
               </span>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-3)' }}>{client.industry || 'General Clinic'}</span>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-3)' }}>{client.industry || 'General Health Post'}</span>
             </div>
           </div>
         </div>
@@ -187,9 +187,9 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
 
       {/* Tabs */}
       <div className="detail-tabs">
-        {['overview', 'inventory', 'notes', 'contacts'].map((t: any) => (
+        {['overview', 'inventory', 'triage', 'contacts'].map((t: any) => (
           <button key={t} type="button" className={`tab ${tab === t ? 'active' : ''}`} onClick={() => setTab(t)}>
-            {t.charAt(0).toUpperCase() + t.slice(1)}
+            {t === 'triage' ? 'Triage & Consultations' : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
         ))}
       </div>
@@ -202,7 +202,7 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
               <h3 className="card-title">Post Information</h3>
               <div className="info-list">
                 <div className="info-item">
-                  <label>Industry / Focus</label>
+                  <label>Region / Focus</label>
                   <div>{client.industry || '—'}</div>
                 </div>
                 <div className="info-item">
@@ -221,6 +221,10 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
         {/* Inventory Tab */}
         {tab === 'inventory' && (
           <div style={{ maxWidth: 800 }}>
+            <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setNoteType("triage"); setNoteUrgency("urgent"); setNoteBody("Triage Request: Specialist review needed for [Patient Case]. Symptoms: "); }}>+ Urgent Triage</button>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setNoteType("consultation"); setNoteUrgency("routine"); setNoteBody("Consultation Request: Requesting video link for specialist consult on [Date/Time]. Cases: "); }}>+ Request Consult</button>
+            </div>
              <div className="card" style={{ padding: 18, marginBottom: 18 }}>
                 <h3 className="card-title" style={{ marginBottom: 14 }}>Add Medicine Stock</h3>
                 <div className="field-row">
@@ -262,9 +266,11 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
                         <td style={{ fontWeight: 600 }}>{item.medicine_name}</td>
                         <td>
                            <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+                              <button onClick={() => updateInvQty(item.id, Math.max(0, item.quantity - 10))} title="-10" style={{ width:24, height:24, borderRadius:4, border:"1px solid var(--border)", background:"var(--surface-3)", cursor:"pointer", color:"var(--text)", fontSize:"0.6rem" }}>-10</button>
                               <button onClick={() => updateInvQty(item.id, Math.max(0, item.quantity - 1))} style={{ width:24, height:24, borderRadius:4, border:'1px solid var(--border)', background:'var(--surface-3)', cursor:'pointer', color:'var(--text)' }}>-</button>
                               <span style={{ minWidth: 20, textAlign: 'center', fontWeight: 700, color: item.quantity < 10 ? '#ef4444' : 'inherit' }}>{item.quantity}</span>
-                              <button onClick={() => updateInvQty(item.id, item.quantity + 1)} style={{ width:24, height:24, borderRadius:4, border:'1px solid var(--border)', background:'var(--surface-3)', cursor:'pointer', color:'var(--text)' }}>+</button>
+                              <button onClick={() => updateInvQty(item.id, item.quantity + 1)} style={{ width:24, height:24, borderRadius:4, border:"1px solid var(--border)", background:"var(--surface-3)", cursor:"pointer", color:"var(--text)" }}>+</button>
+                              <button onClick={() => updateInvQty(item.id, item.quantity + 10)} title="+10" style={{ width:24, height:24, borderRadius:4, border:"1px solid var(--border)", background:"var(--surface-3)", cursor:"pointer", color:"var(--text)", fontSize:"0.6rem" }}>+10</button>
                            </div>
                         </td>
                         <td style={{ fontSize:'0.82rem', color:'var(--text-3)' }}>{item.unit}</td>
@@ -315,10 +321,14 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
           </div>
         )}
 
-        {/* Notes Tab */}
-        {tab === 'notes' && (
+        {/* Triage Tab */}
+        {tab === 'triage' && (
           <div style={{ maxWidth: 680 }}>
             {/* Composer */}
+            <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setNoteType("triage"); setNoteUrgency("urgent"); setNoteBody("Triage Request: Specialist review needed for [Patient Case]. Symptoms: "); }}>+ Urgent Triage</button>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setNoteType("consultation"); setNoteUrgency("routine"); setNoteBody("Consultation Request: Requesting video link for specialist consult on [Date/Time]. Cases: "); }}>+ Request Consult</button>
+            </div>
             <div className="card" style={{ padding: 18, marginBottom: 18 }}>
               <div style={{ display:'flex', gap: 10, marginBottom: 10 }}>
                 <div className="field" style={{ flex: 1 }}>
@@ -369,7 +379,7 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
                 )}
               </div>
               <button type="button" className="btn btn-primary btn-sm" style={{ background: '#ef4444', borderColor: '#ef4444' }} disabled={!noteBody.trim() || postingNote} onClick={postNote}>
-                {postingNote ? <><span className="spinner" />Posting…</> : 'Post Update'}
+                {postingNote ? <><span className="spinner" />Posting…</> : 'Post Triage'}
               </button>
             </div>
 
@@ -377,7 +387,7 @@ export function ClientDetail({ client: initialClient, initialContacts, initialNo
             {notes.length === 0 ? (
               <div className="card"><div className="empty-state" style={{ padding: '32px 24px' }}>
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <h3>No activity logs</h3><p>Start logging triage or updates above.</p>
+                <h3>No triage logs</h3><p>Start logging medical triage or requests above.</p>
               </div></div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

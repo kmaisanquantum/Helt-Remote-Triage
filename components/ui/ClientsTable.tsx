@@ -6,17 +6,17 @@ import { STATUS_CONFIG, formatCurrency, formatDate, initials } from '@/lib/utils
 
 const ALL_STATUSES: ClientStatus[] = ['lead', 'active', 'inactive', 'churned'];
 
-export function ClientsTable({ initialClients }: { initialClients: Client[] }) {
+export function ClientsTable({ initialPosts }: { initialPosts: Client[] }) {
   const [search, setSearch]   = useState('');
   const [status, setStatus]   = useState<ClientStatus | 'all'>('all');
 
   const filtered = useMemo(() => {
-    return initialClients.filter(c => {
+    return initialPosts.filter(c => {
       const matchSearch = !search || c.company.toLowerCase().includes(search.toLowerCase()) || (c.industry ?? '').toLowerCase().includes(search.toLowerCase());
       const matchStatus = status === 'all' || c.status === status;
       return matchSearch && matchStatus;
     });
-  }, [initialClients, search, status]);
+  }, [initialPosts, search, status]);
 
   return (
     <>
@@ -26,7 +26,7 @@ export function ClientsTable({ initialClients }: { initialClients: Client[] }) {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35" strokeLinecap="round"/></svg>
           <input
             type="search"
-            placeholder="Search clients…"
+            placeholder="Search posts…"
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
@@ -54,20 +54,20 @@ export function ClientsTable({ initialClients }: { initialClients: Client[] }) {
         {filtered.length === 0 ? (
           <div className="empty-state">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
-            <h3>{initialClients.length === 0 ? 'No clients yet' : 'No matches found'}</h3>
-            <p>{initialClients.length === 0 ? 'Add your first client to get started.' : 'Try adjusting your search or filter.'}</p>
-            {initialClients.length === 0 && (
-              <Link href="/clients/new" className="btn btn-primary" style={{ marginTop: 16 }}>Add first client</Link>
+            <h3>{initialPosts.length === 0 ? 'No health posts yet' : 'No matches found'}</h3>
+            <p>{initialPosts.length === 0 ? 'Register your first health post to get started.' : 'Try adjusting your search or filter.'}</p>
+            {initialPosts.length === 0 && (
+              <Link href="/clients/new" className="btn btn-primary" style={{ marginTop: 16 }}>Register first post</Link>
             )}
           </div>
         ) : (
           <table className="client-table">
             <thead>
               <tr>
-                <th>Company</th>
-                <th>Industry</th>
+                <th>Post Name</th>
+                <th>Region</th>
                 <th>Status</th>
-                <th>Value</th>
+                <th>Population</th>
                 <th>Added</th>
                 <th></th>
               </tr>

@@ -47,29 +47,29 @@ export default function NewClientPage() {
         </Link>
 
         <div className="card" style={{ padding: 32 }}>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.035em', marginBottom: 6 }}>New Client</h1>
-          <p style={{ color: 'var(--text-3)', fontSize: '0.875rem', marginBottom: 26 }}>Add a company to your pipeline.</p>
+          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.035em', marginBottom: 6 }}>Register Health Post</h1>
+          <p style={{ color: 'var(--text-3)', fontSize: '0.875rem', marginBottom: 26 }}>Register a health post to the provincial network.</p>
 
           {error && <div className="alert alert-error">{error}</div>}
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
             <div className="field">
-              <label>Company Name *</label>
+              <label>Post Name *</label>
               <input type="text" value={form.company} onChange={e => set('company', e.target.value)} placeholder="Acme Corporation" />
             </div>
 
             <div className="field-row">
               <div className="field">
-                <label>Industry</label>
+                <label>Region / Focus</label>
                 <input type="text" value={form.industry} onChange={e => set('industry', e.target.value)} placeholder="e.g. SaaS, Finance" />
               </div>
               <div className="field">
                 <label>Status</label>
                 <select value={form.status} onChange={e => set('status', e.target.value)}>
-                  <option value="lead">Lead</option>
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                  <option value="churned">Churned</option>
+                  <option value="lead">Proposed</option>
+                  <option value="active">Operational</option>
+                  <option value="inactive">Suspended</option>
+                  <option value="churned">Decommissioned</option>
                 </select>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function NewClientPage() {
 
             <div className="field-row">
               <div className="field">
-                <label>Deal Value</label>
+                <label>Population Served</label>
                 <input type="number" min="0" value={form.value} onChange={e => set('value', e.target.value)} placeholder="0" />
               </div>
               <div className="field">
@@ -105,7 +105,7 @@ export default function NewClientPage() {
             <button type="button" className="btn btn-primary" style={{ marginTop: 4 }} disabled={loading} onClick={submit}>
               {loading ? <><span className="spinner" />Creating…</> : <>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14" strokeLinecap="round"/></svg>
-                Create Client
+                Register Post
               </>}
             </button>
           </div>
