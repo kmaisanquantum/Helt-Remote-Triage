@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Helt — Your Client Pipeline',
-  description: 'A fast, focused CRM for tracking clients, contacts, and deals.',
+  title: 'Helt — PNG Rural Telehealth Network',
+  description: "A medical triage and inventory platform for Papua New Guinea's provincial health posts.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

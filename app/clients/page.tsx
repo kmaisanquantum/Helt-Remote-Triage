@@ -19,20 +19,20 @@ export default async function ClientsPage() {
 
   return (
     <div className="app-shell">
-      <Sidebar userName={profile?.full_name ?? 'User'} userEmail={user.email ?? ''} avatarUrl={profile?.avatar_url} clientCount={all.length} />
+      <Sidebar userName={profile?.full_name ?? 'User'} userEmail={user.email ?? ''} avatarUrl={profile?.avatar_url} postCount={all.length} />
       <div className="main-area">
         <div className="page-header">
           <div>
-            <h1 className="page-title">Clients</h1>
-            <p className="page-sub">{all.length} client{all.length !== 1 ? 's' : ''} in your pipeline</p>
+            <h1 className="page-title">Health Posts</h1>
+            <p className="page-sub">{all.length} post{all.length !== 1 ? 's' : ''} in the network</p>
           </div>
           <Link href="/clients/new" className="btn btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14" strokeLinecap="round"/></svg>
-            Add Client
+            Register Post
           </Link>
         </div>
         <div className="page-body">
-          <ClientsTable initialClients={all} />
+          <ClientsTable initialPosts={all} />
         </div>
       </div>
     </div>

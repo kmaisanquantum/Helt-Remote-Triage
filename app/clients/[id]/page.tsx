@@ -21,7 +21,7 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="app-shell">
-      <Sidebar userName={profile?.full_name ?? 'User'} userEmail={user.email ?? ''} avatarUrl={profile?.avatar_url} clientCount={allClients?.length ?? 0} />
+      <Sidebar userName={profile?.full_name ?? 'User'} userEmail={user.email ?? ''} avatarUrl={profile?.avatar_url} postCount={allClients?.length ?? 0} />
       <div className="main-area">
         <ClientDetail
           client={client}
