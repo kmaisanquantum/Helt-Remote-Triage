@@ -52,12 +52,21 @@ export function Sidebar({ userName, userEmail, avatarUrl, postCount = 0 }: Sideb
           <NextLink key={n.href} href={n.href} className={`nav-item ${path === n.href || (n.href !== '/dashboard' && path.startsWith(n.href) && n.href !== '/clients/new') ? 'active' : ''}`}>
             {n.icon}
             {n.label}
-            {n.badge != null && <span className="nav-badge">${n.badge}</span>}
+            {n.badge != null && <span className="nav-badge">{n.badge}</span>}
           </NextLink>
         ))}
       </nav>
 
       <div className="sidebar-footer">
+        <div style={{ padding: '0 12px 16px', borderBottom: '1px solid var(--border)', marginBottom: 16 }}>
+          <div className="nav-section-label" style={{ padding: '0 0 8px' }}>Support & Contact</div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-3)', display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <div><b>Email:</b> wokman@dspng.tech</div>
+            <div><b>Phone/WA:</b> (675) 8300 99881</div>
+            <div><b>Text:</b> (675) 8300 9881</div>
+          </div>
+        </div>
+
         <div className="user-chip">
           <div className="avatar">
             {avatarUrl ? <img src={avatarUrl} alt={userName} /> : initials(userName)}

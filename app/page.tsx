@@ -4,7 +4,7 @@ export default function LandingPage() {
   return (
     <>
       <style>{`
-        .land { position: relative; z-index: 1; }
+        .land { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
         nav {
           display: flex; align-items: center; justify-content: space-between;
           padding: 18px 32px; border-bottom: 1px solid var(--border);
@@ -20,7 +20,7 @@ export default function LandingPage() {
         }
         .nav-brand { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
 
-        .hero { max-width: 820px; margin: 0 auto; padding: 96px 32px 64px; text-align: center; }
+        .hero { max-width: 820px; margin: 0 auto; padding: 96px 32px 64px; text-align: center; flex: 1; }
         .hero-pill {
           display: inline-flex; align-items: center; gap: 8px;
           background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25);
@@ -52,6 +52,20 @@ export default function LandingPage() {
         }
         .feat h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
         .feat p  { font-size: 0.82rem; color: var(--text-3); line-height: 1.55; }
+
+        .land-footer {
+          border-top: 1px solid var(--border);
+          padding: 48px 32px;
+          background: var(--surface);
+          text-align: center;
+        }
+        .footer-content { max-width: 900px; margin: 0 auto; }
+        .footer-contact {
+          display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+          margin-top: 24px; font-size: 0.875rem; color: var(--text-3);
+        }
+        .contact-item { display: flex; align-items: center; gap: 8px; }
+        .contact-item b { color: var(--text-2); font-weight: 600; }
       `}</style>
 
       <div className="land">
@@ -100,6 +114,19 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+
+        <footer className="land-footer">
+          <div className="footer-content">
+            <div style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: 8 }}>Helt Telehealth PNG</div>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-3)' }}>Connecting rural health posts with modern medical support.</p>
+            <div className="footer-contact">
+              <div className="contact-item"><b>Email:</b> wokman@dspng.tech</div>
+              <div className="contact-item"><b>Phone:</b> (675) 8300 99881</div>
+              <div className="contact-item"><b>Whatsapp:</b> (675) 8300 99881</div>
+              <div className="contact-item"><b>Text:</b> (675) 8300 9881</div>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
