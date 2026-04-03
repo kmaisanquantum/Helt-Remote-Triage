@@ -22,7 +22,7 @@ export default function LoginPage() {
     <div className="auth-page">
       <div className="auth-box">
         <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:26 }}>
-          <div style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,#6366f1,#818cf8)', display:'grid', placeItems:'center', boxShadow:'0 0 16px rgba(99,102,241,0.35)' }}>
+          <div style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,#ef4444,#f87171)', display:'grid', placeItems:'center', boxShadow:'0 0 16px rgba(239,68,68,0.35)' }}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
           <span style={{ fontSize:'1.1rem', fontWeight:700, letterSpacing:'-0.02em' }}>Helt</span>
@@ -40,11 +40,19 @@ export default function LoginPage() {
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••"
               onKeyDown={e => e.key === 'Enter' && submit()} />
           </div>
-          <button type="button" className="btn btn-primary" style={{ width:'100%' }} disabled={loading} onClick={submit}>
+          <button type="button" className="btn btn-primary" style={{ width:'100%', background: '#ef4444', borderColor: '#ef4444' }} disabled={loading} onClick={submit}>
             {loading ? <><span className="spinner"/>Signing in…</> : 'Sign in'}
           </button>
         </div>
-        <p className="auth-footer">No account? <Link href="/auth/signup">Create one free</Link></p>
+        <p className="auth-footer">No account? <Link href="/auth/signup" style={{ color: '#ef4444' }}>Create one free</Link></p>
+
+        <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+          <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-4)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 12 }}>Technical Support</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-3)', display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div>Email: <b>wokman@dspng.tech</b></div>
+            <div>Phone/WA: <b>(675) 8300 99881</b></div>
+          </div>
+        </div>
       </div>
     </div>
   );
